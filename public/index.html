@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express</title>
+</head>
+<body>
+
+    <div>
+        Servidor Express
+    </div>
+
+<div>
+    <form action="/api/mp" method="POST">
+        <script
+         src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+         data-preference-id="$$init_point$$">
+        </script>
+        <input name="idProducto" type="hidden" value="community-freelancer-html">
+        <input name="producto" type="hidden" value="community-freelancer-html">
+        <input name="precio" type="hidden" value="6600">
+        <input name="imagen" type="hidden" value="">
+        <input name="nombre" type="hidden" value="Matias Maldonado">
+        <input name="uid" type="hidden" value="FRwKtRauItWZsxEP1ig2aywQeFt2">
+        <input name="mail" type="hidden" value="maldo89.19@gmail.com">
+      </form>
+</div>
+
+<form class="formularioPAgo" name="formulario" method="post" action="/api/mp">
+    <input name="idProducto" type="hidden" value="community-freelancer-html">
+    <input name="producto" type="hidden" value="community-freelancer-html">
+    <input name="precio" type="hidden" value="6600">
+    <input name="imagen" type="hidden" value="">
+    <input name="nombre" type="hidden" value="Matias Maldonado">
+    <input name="uid" type="hidden" value="FRwKtRauItWZsxEP1ig2aywQeFt2">
+    <input name="mail" type="hidden" value="maldo89.19@gmail.com">
+    <button type="submit" value="COMPRAR" class="btn btn-success">
+    <img src="/static/media/mercadopago.974770d3.svg" alt="Mercado Pago" class="mercadopagobtn">
+    </button>
+    <img src="/static/media/tarjetas.03af3530.png" alt="tarjetas" class="tarjetas">
+</form>
+<a href="$$init_point$$" target="_blank">Pagar</a>
+</body>
+</html>
