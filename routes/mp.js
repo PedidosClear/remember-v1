@@ -36,9 +36,9 @@ mercadopago.configure({
       });
 
       preference.back_urls = {
-        "success": "http://192.168.0.70:3000/success",
-        "failure": "http://192.168.0.70:3000/failure",
-        "pending": "http://192.168.0.70:3000/pending"
+        "success": "https://app-remember-mm.herokuapp.com/success",
+        "failure": "https://app-remember-mm.herokuapp.com/failure",
+        "pending": "https://app-remember-mm.herokuapp.com/pending"
     };
     preference.notification_url = "https://app-remember-mm.herokuapp.com/api/notifications"
     // preference.auto_return ="approved";
