@@ -6,7 +6,7 @@ const mercadopago = require ('mercadopago');
 
 // Agrega credencialesy
 mercadopago.configure({
-    access_token: 'TEST-8827071824006547-012722-cb470c99449c0778790570a89b985dac-74287929'
+    access_token: 'TEST-987669859953011-033118-3a5a31e55eb7c49c6db4a1a24e364299-539610834'
   });
 
   // Crea un objeto de preferencia
