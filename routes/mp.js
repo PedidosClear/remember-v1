@@ -40,7 +40,7 @@ mercadopago.configure({
         "failure": "http://192.168.0.70:3000/failure",
         "pending": "http://192.168.0.70:3000/pending"
     };
-    preference.notification_url = "http://localhost:3000/api/notifications"
+    preference.notification_url = "https://app-remember-mm.herokuapp.com/api/notifications"
     // preference.auto_return ="approved";
     console.log(preference);
 
@@ -67,7 +67,7 @@ mercadopago.configure({
 router.get('/notifications', async(req, res)=>{
   // console.log(req);
   const body = req.body;
-  
+  // res.send(body)
   console.log('body '+ body);
 
   res.status(200).json('')
