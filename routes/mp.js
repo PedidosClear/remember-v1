@@ -99,40 +99,45 @@ router.post('/notifications', async(req, res)=>{
 
   db.collection("notifications").add(bodyIpn)
   
-  if(bodyIpn.type == 'payment'){
-    var id = bodyIpn.data.id
-    mercadopago.payment.get(id).then(function (data) {
-      return data.body
-    }).then(function (dataPayment) {
-      console.log(dataPayment);
-      mercadopago.merchant_orders.get(dataPayment.order.id).then(function (data) {
-        db.collection("Ventas").add({
-          "IdPayment" : dataPayment.id,
-          "Cliente" : dataPayment.payer,
-          "status" : dataPayment.status,
-          "date_created" : dataPayment.date_created,
-          "IdOrden" : dataOrders.id,
-          "external_reference" : dataOrders.external_reference,
-          "items" : dataOrders.items,
-          "shipments" : dataOrders.shipments,
-          "order_status" : dataOrders.order_status
-        }).then(()=>{
-          res.status(200).json('OK-Guardado')
-        }).catch(()=>{
-          res.status(200).json('Error-Guardado')
+  if(bodyIpn.type != null){
+    db.collection("entro").add(bodyIpn)
+    if(bodyIpn.type == 'payment'){
+      var id = bodyIpn.data.id
+      mercadopago.payment.get(id).then(function (data) {
+        return data.body
+      }).then(function (dataPayment) {
+        console.log(dataPayment);
+        mercadopago.merchant_orders.get(dataPayment.order.id).then(function (data) {
+          db.collection("Ventas").add({
+            "IdPayment" : dataPayment.id,
+            "Cliente" : dataPayment.payer,
+            "status" : dataPayment.status,
+            "date_created" : dataPayment.date_created,
+            "IdOrden" : dataOrders.id,
+            "external_reference" : dataOrders.external_reference,
+            "items" : dataOrders.items,
+            "shipments" : dataOrders.shipments,
+            "order_status" : dataOrders.order_status
+          }).then(()=>{
+            res.status(200).json('OK-Guardado')
+          }).catch(()=>{
+            res.status(200).json('Error-Guardado')
+          })
         })
+        .catch(function (error) {
+          // console.log('Error merchant_orders')
+          res.status(200).json({'error': error})
+        });
       })
       .catch(function (error) {
-        // console.log('Error merchant_orders')
+        // console.log('Error Aca payment')
         res.status(200).json({'error': error})
       });
-    })
-    .catch(function (error) {
-      // console.log('Error Aca payment')
-      res.status(200).json({'error': error})
-    });
+    } else {
+      res.status(200).json('Distinto a Payment')
+    }
   } else {
-    res.status(200).json('Distinto a Payment')
+    db.collection("noEntro").add(bodyIpn)
   }
 
 })
