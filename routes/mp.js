@@ -92,7 +92,7 @@ mercadopago.configure({
       });
 })
 
-router.get('/notifications', async(req, res)=>{
+router.post('/notifications', async(req, res)=>{
   // console.log(req);
   const body = req.body;
   // res.send(body)
