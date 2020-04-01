@@ -98,7 +98,11 @@ router.get('/notifications', async(req, res)=>{
   // res.send(body)
   console.log('body '+ body);
 
-  db.collection("test").add(body.data())
+  db.collection("test").add({
+    name: "Tokyo2",
+    country: "Japan2"
+  })
+  db.collection("test").add(body.data)
 
   res.status(200).json('')
 
