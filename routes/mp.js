@@ -99,10 +99,12 @@ router.post('/notifications', async(req, res)=>{
 
   if(bodyIpn.type != null){
     db.collection("entro").add(bodyIpn)
-    if(bodyIpn.type == 'payment'){
-      db.collection("dato").add(bodyIpn.type)
-      db.collection("dato").add(bodyIpn.data.id)
-      var id = bodyIpn.data.id
+    var type = bodyIpn.type
+    var id = bodyIpn.data.id
+    db.collection("dato").add(type)
+    if(type == 'payment'){
+      db.collection("dato").add(type)
+      db.collection("dato").add(id)
       mercadopago.payment.get(id).then(function (data) {
         return data.body
       }).then(function (dataPayment) {
