@@ -103,20 +103,21 @@ router.post('/notifications', async(req, res)=>{
       mercadopago.payment.get(id).then(function (data) {
         return data.body
       }).then(function (dataPayment) {
-        console.log('dataPayment');
+        // console.log('dataPayment');
         mercadopago.merchant_orders.get(dataPayment.order.id).then(function (data) {
           // console.log('dataOrders');
           var dataOrders = data.body
           db.collection("ventas").doc(dataPayment.id.toString()).set({
-            "IdPayment" : dataPayment.id,
-            "Cliente" : dataPayment.payer,
-            "status" : dataPayment.status,
-            "date_created" : dataPayment.date_created,
+            "payerPayment" : dataPayment.payer,
+            "transaction_details" : dataPayment.transaction_details,
             "IdOrden" : dataOrders.id,
             "external_reference" : dataOrders.external_reference,
             "items" : dataOrders.items,
             "shipments" : dataOrders.shipments,
-            "order_status" : dataOrders.order_status
+            "order_status" : dataOrders.order_status,
+            "collector" : dataOrders.collector,
+            "payments" : dataOrders.payments,
+            "cancelled" : dataOrders.cancelled,
           }).then(()=>{
             console.log("Document successfully written!");
             res.status(200).json('OK-Guardado')
