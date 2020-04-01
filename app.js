@@ -35,7 +35,7 @@ const history =require('connect-history-api-fallback')
 app.use(history()) // antes de ruta estatica
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.set('puerto', process.env.PORT || 3000);
+app.set('puerto', process.env.PORT || 5000);
 app.listen(app.get('puerto'),function(){
     console.log('Escuchando Puerto:' + app.get('puerto'));
 })

@@ -6,7 +6,7 @@ const mercadopago = require ('mercadopago');
 
 // Agrega credencialesy
 mercadopago.configure({
-    access_token: 'TEST-987669859953011-033118-3a5a31e55eb7c49c6db4a1a24e364299-539610834'
+    access_token: 'APP_USR-987669859953011-033118-79a18a1fdff66318c73e6a65bbe524c1-539610834'
   });
 
   // Crea un objeto de preferencia
@@ -40,9 +40,26 @@ mercadopago.configure({
         "failure": "https://app-remember-mm.herokuapp.com/failure",
         "pending": "https://app-remember-mm.herokuapp.com/pending"
     };
-    preference.notification_url = "https://app-remember-mm.herokuapp.com/api/notifications"
-    // preference.auto_return ="approved";
-    console.log(preference);
+      preference.shipments = {
+        "mode": "me2",
+        "local_pickup": true,
+        "dimensions": "30x30x30,500"
+      }
+      let todaynow = new Date();
+      let dia = todaynow.getDate() < 10 ? '0'+todaynow.getDate() : todaynow.getDate().toString();
+      let mes = todaynow.getMonth()+1 < 10 ? '0'+(todaynow.getMonth()+1) : (todaynow.getMonth()+1).toString();
+      let anio = todaynow.getFullYear() < 10 ? '0'+todaynow.getFullYear() : todaynow.getFullYear().toString();
+      let hora = todaynow.getHours() < 10 ? '0'+todaynow.getHours() : todaynow.getHours().toString();
+      let min = todaynow.getUTCMinutes() < 10 ? '0'+todaynow.getUTCMinutes() : todaynow.getUTCMinutes().toString();
+      let seg = todaynow.getSeconds() < 10 ? '0'+todaynow.getSeconds() : todaynow.getSeconds().toString();
+      let mseg = todaynow.getMilliseconds() < 10 ? '0'+todaynow.getMilliseconds() : todaynow.getMilliseconds().toString();
+
+      let external_reference = dia+mes+anio+hora+min+seg+mseg
+
+      preference.external_reference = external_reference
+      preference.notification_url = "https://app-remember-mm.herokuapp.com/api/notifications"
+      // preference.auto_return ="approved";
+      console.log(preference);
 
       var respuesta = "HOLA"
 
@@ -58,7 +75,7 @@ mercadopago.configure({
 
             // console.log('3'+ response.body.init_point);
             // res.status(200).json(response)
-            res.status(200).json(global.init_point)
+            res.status(200).json(response.body)
           }).catch(function(error){
             console.log('E-'+ error);
           });
