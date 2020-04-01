@@ -96,13 +96,13 @@ router.get('/notifications', async(req, res)=>{
   // console.log(req);
   const body = req.body;
   // res.send(body)
-  console.log('body '+ body);
+  console.log(body);
 
   db.collection("test").add({
     name: "Tokyo2",
     country: "Japan2"
   })
-  db.collection("test").add(body.data)
+  db.collection("notifications").add(body)
 
   res.status(200).json('')
 
