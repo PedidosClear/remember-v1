@@ -95,22 +95,19 @@ mercadopago.configure({
 router.post('/notifications', async(req, res)=>{
   
   const bodyIpn = req.body;
-  // bodyIpn.type = 'payment'
-
+  console.log(bodyIpn.type);
   if(bodyIpn.type != null){
-    db.collection("entro").add(bodyIpn)
     var type = bodyIpn.type
     var id = bodyIpn.data.id
-    db.collection("dato").add(type)
-    if(type == 'payment'){
-      db.collection("dato").add(type)
-      db.collection("dato").add(id)
+    // if(type == "payment"){
       mercadopago.payment.get(id).then(function (data) {
         return data.body
       }).then(function (dataPayment) {
-        console.log(dataPayment);
+        console.log('dataPayment');
         mercadopago.merchant_orders.get(dataPayment.order.id).then(function (data) {
-          db.collection("Ventas").add({
+          // console.log('dataOrders');
+          var dataOrders = data.body
+          db.collection("ventas").doc(dataPayment.id.toString()).set({
             "IdPayment" : dataPayment.id,
             "Cliente" : dataPayment.payer,
             "status" : dataPayment.status,
@@ -121,9 +118,11 @@ router.post('/notifications', async(req, res)=>{
             "shipments" : dataOrders.shipments,
             "order_status" : dataOrders.order_status
           }).then(()=>{
+            console.log("Document successfully written!");
             res.status(200).json('OK-Guardado')
-          }).catch(()=>{
-            res.status(200).json('Error-Guardado')
+          }).catch(function(error) {
+            console.log("Error writing document: ", error);
+            res.status(500).json('Error-Guardado')
           })
         })
         .catch(function (error) {
@@ -135,15 +134,15 @@ router.post('/notifications', async(req, res)=>{
         // console.log('Error Aca payment')
         res.status(200).json({'error': error})
       });
-    } else {
-      db.collection("datoELSE").add(bodyIpn.type)
-      db.collection("datoELSE").add(bodyIpn.data.id)
-      res.status(200).json('Distinto a Payment')
-    }
+    // } else {
+    //   db.collection("datoELSE").add(bodyIpn.type)
+    //   db.collection("datoELSE").add(bodyIpn.data.id)
+    //   res.status(200).json('Distinto a Payment')
+    // }
   } else {
-    db.collection("noEntro").add(bodyIpn)
+    res.status(200).json('No Guardar')
+    // db.collection("noEntro").add(bodyIpn)
   }
-
 })
 
   // exportar de router
