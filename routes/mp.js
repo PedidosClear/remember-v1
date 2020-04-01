@@ -1,6 +1,17 @@
 import express from 'express'
 const router = express.Router()
 
+// const db = require('../firebase')
+
+var admin = require("firebase-admin");
+var serviceAccount = require("../remember-2816a-firebase-adminsdk-gmflf-600c203178.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+  // ,  databaseURL: "https://remember-2816a.firebaseio.com"
+});
+
+const db = admin.firestore();
+
 // SDK de Mercado Pago
 const mercadopago = require ('mercadopago');
 
@@ -63,22 +74,22 @@ mercadopago.configure({
 
       var respuesta = "HOLA"
 
-          mercadopago.preferences.create(preference)
-          .then(function(response){
-          // Este valor reemplazará el string "$$init_point$$" en tu HTML
-            respuesta = response.body.init_point;
+      mercadopago.preferences.create(preference)
+      .then(function(response){
+      // Este valor reemplazará el string "$$init_point$$" en tu HTML
+        respuesta = response.body.init_point;
 
-            global.init_point = response.body.init_point;
-            // console.log(global.init_point);
-            // console.log('1'+ response.body.init_point);
-            // console.log('2'+ respuesta.toString());
+        global.init_point = response.body.init_point;
+        // console.log(global.init_point);
+        // console.log('1'+ response.body.init_point);
+        // console.log('2'+ respuesta.toString());
 
-            // console.log('3'+ response.body.init_point);
-            // res.status(200).json(response)
-            res.status(200).json(response.body)
-          }).catch(function(error){
-            console.log('E-'+ error);
-          });
+        // console.log('3'+ response.body.init_point);
+        // res.status(200).json(response)
+        res.status(200).json(response.body)
+      }).catch(function(error){
+        console.log('E-'+ error);
+      });
 })
 
 router.get('/notifications', async(req, res)=>{
@@ -86,6 +97,23 @@ router.get('/notifications', async(req, res)=>{
   const body = req.body;
   // res.send(body)
   console.log('body '+ body);
+
+  db.collection("test").add(body.data())
+
+  res.status(200).json('')
+
+})
+
+router.get('/test', async(req, res)=>{
+  // console.log(req);
+  const body = req.body;
+  // res.send(body)
+  console.log('body '+ body);
+
+  db.collection("test").add({
+    name: "Tokyo",
+    country: "Japan"
+  })
 
   res.status(200).json('')
 
