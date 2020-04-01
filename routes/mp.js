@@ -97,11 +97,11 @@ router.post('/notifications', async(req, res)=>{
   const bodyIpn = req.body;
   // bodyIpn.type = 'payment'
 
-  db.collection("notifications").add(bodyIpn)
-  
   if(bodyIpn.type != null){
     db.collection("entro").add(bodyIpn)
     if(bodyIpn.type == 'payment'){
+      db.collection("dato").add(bodyIpn.type)
+      db.collection("dato").add(bodyIpn.data.id)
       var id = bodyIpn.data.id
       mercadopago.payment.get(id).then(function (data) {
         return data.body
@@ -134,6 +134,8 @@ router.post('/notifications', async(req, res)=>{
         res.status(200).json({'error': error})
       });
     } else {
+      db.collection("datoELSE").add(bodyIpn.type)
+      db.collection("datoELSE").add(bodyIpn.data.id)
       res.status(200).json('Distinto a Payment')
     }
   } else {
