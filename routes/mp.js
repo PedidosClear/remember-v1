@@ -96,6 +96,8 @@ router.post('/notifications', async(req, res)=>{
   
   const bodyIpn = req.body;
   // bodyIpn.type = 'payment'
+
+  db.collection("notifications").add(bodyIpn)
   
   if(bodyIpn.type == 'payment'){
     var id = bodyIpn.data.id
