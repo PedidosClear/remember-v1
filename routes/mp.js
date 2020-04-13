@@ -40,14 +40,17 @@ mercadopago.configure({
       };
       body.forEach((p) =>{
         preference.items.push({
-            title: p.nombre,
+            id: p.uid,
+            description: p.talle == undefined ? 'Talle: ' + p.talle + ' Modelo: ' + p.modelo : '',
+            picture_url:'https://firebasestorage.googleapis.com/v0/b/remember-2816a.appspot.com/o/logo.png?alt=media&token=22b8dbe0-ce0b-4fdf-962f-a2e7ebb25912',
+            title: 'Productos Remembers',
             unit_price: p.precio,
             quantity: 1
         })
       });
 
       preference.back_urls = {
-        "success": "https://app-remember-mm.herokuapp.com/success",
+        "success": "https://app-remember-mm.herokuapp.com/",
         "failure": "https://app-remember-mm.herokuapp.com/failure",
         "pending": "https://app-remember-mm.herokuapp.com/pending"
     };
@@ -56,6 +59,7 @@ mercadopago.configure({
         "local_pickup": true,
         "dimensions": "30x30x30,500"
       }
+
       let todaynow = new Date();
       let dia = todaynow.getDate() < 10 ? '0'+todaynow.getDate() : todaynow.getDate().toString();
       let mes = todaynow.getMonth()+1 < 10 ? '0'+(todaynow.getMonth()+1) : (todaynow.getMonth()+1).toString();

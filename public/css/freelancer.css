@@ -9869,3 +9869,17 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
+
+
+@media (min-width: 300px) {
+  #component {
+    margin-top: 85px;
+  }
+}
+
+@media (min-width: 992px) {
+  #component {
+    margin-top: 120px;
+  }
+}
