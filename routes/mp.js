@@ -41,7 +41,7 @@ mercadopago.configure({
       body.forEach((p) =>{
         preference.items.push({
             id: p.uid,
-            description: p.talle == undefined ? 'Talle: ' + p.talle + ' Modelo: ' + p.modelo : '',
+            description: p.talle != undefined ? 'Talle: ' + p.talle + ' Modelo: ' + p.modelo : '',
             picture_url:'https://firebasestorage.googleapis.com/v0/b/remember-2816a.appspot.com/o/logo.png?alt=media&token=22b8dbe0-ce0b-4fdf-962f-a2e7ebb25912',
             title: 'Productos Remembers',
             unit_price: p.precio,
