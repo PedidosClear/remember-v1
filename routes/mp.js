@@ -51,9 +51,9 @@ mercadopago.configure({
       });
 
       preference.back_urls = {
-        "success": "https://app-app-remember.herokuapp.com/",
-        "failure": "https://app-app-remember.herokuapp.com/failure",
-        "pending": "https://app-app-remember.herokuapp.com/pending"
+        "success": "https://remember-app.herokuapp.com/",
+        "failure": "https://remember-app.herokuapp.com/failure",
+        "pending": "https://remember-app.herokuapp.com/pending"
     };
 
       preference.payer = {
@@ -88,7 +88,7 @@ mercadopago.configure({
       // let external_reference = dia+mes+anio+hora+min+seg+mseg
 
       // preference.external_reference = external_reference
-      preference.notification_url = "https://app-app-remember.com/api/notifications"
+      preference.notification_url = "https://remember-app.herokuapp.com/api/notifications"
       // preference.auto_return ="approved";
       // console.log(preference);
 
