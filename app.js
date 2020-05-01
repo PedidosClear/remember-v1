@@ -1,3 +1,4 @@
+var compression = require('compression');
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
@@ -10,6 +11,7 @@ app.use(cors())
 app.use(express.json())
 //application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
+app.use(compression());
 
 // Rutas
 // app.get('/', function(req, res){
