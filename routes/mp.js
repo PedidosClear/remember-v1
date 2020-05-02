@@ -128,8 +128,12 @@ router.post('/notifications', async(req, res)=>{
           mercadopago.preferences.get(dataOrders.preference_id).then(data => {
 
             var dataPreference = data.body
+
+            var fecha = new Date(dataOrders.payments[0].date_created);
+            fecha = (fecha.getMonth()+1<10?'0'+(fecha.getMonth()+1):fecha.getMonth()+1)+"/"+(fecha.getDate()<10?'0'+(fecha.getDate()):fecha.getDate())+"/"+fecha.getFullYear()
             
             db.collection("ventas").doc(dataPayment.id.toString()).set({
+              "date": fecha ,
               "payerPayment" : dataPayment.payer,
               "transaction_details" : dataPayment.transaction_details,
               "IdOrden" : dataOrders.id,
