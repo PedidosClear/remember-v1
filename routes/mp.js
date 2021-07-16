@@ -4,14 +4,14 @@ const router = express.Router()
 
 // const db = require('../firebase')
 
-var admin = require("firebase-admin");
-var serviceAccount = require("../remember-2816a-firebase-adminsdk-gmflf-600c203178.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-  // ,  databaseURL: "https://remember-2816a.firebaseio.com"
-});
+// var admin = require("firebase-admin");
+// var serviceAccount = require("../remember-2816a-firebase-adminsdk-gmflf-600c203178.json");
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+//   // ,  databaseURL: "https://remember-2816a.firebaseio.com"
+// });
 
-const db = admin.firestore();
+// const db = admin.firestore();
 
 // SDK de Mercado Pago
 const mercadopago = require ('mercadopago');

@@ -31,6 +31,7 @@ app.get('/pending', function(req, res){
 })
 
 app.use('/api', require('./routes/mp'));
+app.use('/api', require('./routes/cotizacion'));
 
 var options = {
     dotfiles: 'ignore',
